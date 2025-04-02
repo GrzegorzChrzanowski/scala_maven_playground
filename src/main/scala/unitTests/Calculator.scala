@@ -1,6 +1,6 @@
-package calc
+package unitTests
 
-class MyCalculator {
+object Calculator {
 
   def add(first: Int, second: Int): Int = {
     first + second

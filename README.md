@@ -1,13 +1,19 @@
 # scala_maven_playground
-Repository with scala example tests configured with maven
+Repository with scala unit example tests configured with maven
 
-# test execution
+# all tests execution, html scalatest and surefire-reports generation
+mvn clean install
+mvn clean test
+mvn test
 
-# specific test execution
+# site report generation only
+mvn site
 
-mvn test -Dcucumber.filter.tags="@tag"
+# report can be found in location
 
-# all tests execution
+target/html/scalatest/index.html
+target/html/scalatest/unitTests.CalculatorTest.html
+target/html/scalatest/unitTests.HelloWorldTest.html
 
-mvn test -Dcucumber.filter.tags="@all"
+target/site/surefire-report.html
 
