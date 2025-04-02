@@ -1,6 +1,14 @@
 # scala_maven_playground
 Repository with scala unit example tests configured with maven
 
+# BDD test execution
+
+mvn test -Dcucumber.filter.tags="@tag"
+
+# BDD all tests execution
+
+mvn test -Dcucumber.filter.tags="@all"
+
 # all tests execution, html scalatest and surefire-reports generation
 mvn clean install
 mvn clean test

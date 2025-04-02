@@ -4,7 +4,6 @@ import org.scalatest.matchers.should.Matchers
 
 class CalculatorTest extends AnyFlatSpec with Matchers {
 
-
   "add method" should "return the correct sum" in {
     Calculator.add(2, 3) shouldEqual 5
     Calculator.add(-1, 1) shouldEqual 0
