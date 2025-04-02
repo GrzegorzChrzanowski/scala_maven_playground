@@ -8,7 +8,6 @@ class StepDefinitions extends ScalaDsl with EN {
   var num1: Int = 0
   var num2: Int = 0
   var result: Int = 0
-  var calc: Calculator = _
 
   Given("""I have numbers (\d+) and (\d+)$""") { (a: Int, b: Int) =>
     num1 = a
@@ -16,11 +15,10 @@ class StepDefinitions extends ScalaDsl with EN {
   }
 
   Given("""my calculator is running""") { () =>
-    calc = new Calculator()
   }
 
   When("""^I add (\d+) and (\d+)$""") { (firstNumber: Int, secondNumber: Int) =>
-    result = calc.add(firstNumber, secondNumber)
+    result = Calculator.add(firstNumber, secondNumber)
   }
 
   When("I add them") {
@@ -35,6 +33,6 @@ class StepDefinitions extends ScalaDsl with EN {
   }
 
   When("""^I subtract (\d+) and (\d+)$""") { (firstNumber: Int, secondNumber: Int) =>
-    result = calc.sub(firstNumber, secondNumber)
+    result = Calculator.sub(firstNumber, secondNumber)
   }
 }

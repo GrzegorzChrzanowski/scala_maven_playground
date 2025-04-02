@@ -7,7 +7,7 @@ import org.junit.runner.RunWith
 @CucumberOptions(
   features = Array("src/test/resources/features"),
   glue = Array("classpath:steps"),
-  tags = "@wip",
+  tags = "@all",
   monochrome = true,
   plugin = Array("pretty",
     "html:target/cucumber/test-report.html",
