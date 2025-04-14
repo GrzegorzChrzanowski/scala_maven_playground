@@ -28,3 +28,4 @@ class HelloWorldTest extends AnyFlatSpec {
     assert(!HelloWorld.endsWith("Universe"))
   }
 }
+
