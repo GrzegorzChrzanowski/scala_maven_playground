@@ -1,4 +1,5 @@
 package steps
+
 import io.cucumber.scala.{EN, ScalaDsl}
 import org.junit.Assert.assertEquals
 import unitTests.Calculator

@@ -3,18 +3,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>com.example</groupId>
     <artifactId>scala-framework</artifactId>
     <version>1.0-SNAPSHOT</version>
-
     <properties>
         <scala.version>2.13.12</scala.version>
         <scala.version.major>2.13</scala.version.major>
         <scalatest.version>3.2.14</scalatest.version>
         <cucumber.version>7.20.1</cucumber.version>
     </properties>
-
     <dependencies>
         <!-- Scala Library -->
         <dependency>
@@ -39,7 +36,6 @@
             <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
-
         <!-- Cucumber JUnit Runner -->
         <dependency>
             <groupId>io.cucumber</groupId>
@@ -47,7 +43,6 @@
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
-
         <!-- JUnit Vintage Engine (For Running JUnit 4 Tests) -->
         <dependency>
             <groupId>org.junit.vintage</groupId>
@@ -55,22 +50,18 @@
             <version>5.9.3</version>
             <scope>test</scope>
         </dependency>
-
-
-    <!-- Cucumber for BDD -->
+        <!-- Cucumber for BDD -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-core</artifactId>
             <version>7.20.1</version>
         </dependency>
-
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-scala_2.13</artifactId>
@@ -96,7 +87,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <!-- Scala Plugin -->
@@ -118,14 +108,10 @@
                         <arg>-deprecation</arg>
                         <arg>-feature</arg>
                     </args>
-                    <jvmArgs>
-                        <jvmArg>-Xms512m</jvmArg>
-                        <jvmArg>-Xmx1024m</jvmArg>
-                    </jvmArgs>
                 </configuration>
             </plugin>
-
             <!-- To use the ScalaTest Maven plugin, you need to disable SureFire and enable ScalaTest. -->
+            <!-- Surefire Plugin for Running Tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -134,7 +120,6 @@
                     <skipTests>false</skipTests>
                 </configuration>
             </plugin>
-
             <!-- ScalaTest Maven Plugin for testing -->
             <plugin>
                 <groupId>org.scalatest</groupId>
@@ -153,6 +138,58 @@
                         <goals>
                             <goal>test</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- creating jar binary -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>default-compile</id>
+                        <phase>none</phase>
+                    </execution>
+                    <execution>
+                        <id>default-testCompile</id>
+                        <phase>none</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>default-jar</id>
+                        <phase>none</phase>
+                    </execution>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <mainClass>unitTests.Calculator</mainClass>
+                                </manifest>
+                                <manifestEntries>
+                                    <Created-By>${user.name}</Created-By>
+                                </manifestEntries>
+                            </archive>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                            <finalName>${project.artifactId}-${project.version}</finalName>
+                            <!-- If we don't set this, Maven complains about jar replacing the default. -->
+                            <appendAssemblyId>true</appendAssemblyId>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
